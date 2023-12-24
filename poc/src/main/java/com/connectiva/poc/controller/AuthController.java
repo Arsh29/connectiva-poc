@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.http.HttpResponse;
+import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,7 +39,7 @@ public class AuthController {
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request){
+    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) throws NoSuchAlgorithmException {
         this.doAuthenticate(request.getEmail(),request.getPassword());
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = this.jwtHelper.generateToken(userDetails);
