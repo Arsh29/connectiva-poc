@@ -1,1 +1,12 @@
-
+server:
+  port: 8090
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/connectiva
+  security:
+    csrf:
+      disable: true
+    user:
+      name: admin
+      password: admin
